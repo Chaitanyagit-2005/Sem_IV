@@ -12,18 +12,42 @@ class SY2022bit041 {
         
      //   String random = cm.generateRandomRegistrationNo();
      //   System.out.println(random);
-        String[] a10K = new String[10000];     
+        String[] a10K = new String[10000];  
+           
         a10K = cm.displayRegNo(A10K);
+        long startTime1 = System.currentTimeMillis();
         int validCount1 = cm.getValidRegistrationsCount(a10K);
+        long endTime1 = System.currentTimeMillis();
+        long timeTaken11 = endTime1 - startTime1;
+             System.out.println(timeTaken1);
         System.out.println(validCount1);
-         String[] a20K = new String[20000];     
+        
+        
+         String[] a20K = new String[20000];
         a20K = cm.displayRegNo(A20K);
+        long startTime2 = System.currentTimeMillis();
         int validCount2 = cm.getValidRegistrationsCount(a20K);
+        long endTime2 = System.currentTimeMillis();
+        long timeTaken12 = endTime2 - startTime2;
+             System.out.println(timeTaken1);
         System.out.println(validCount2);
-         String[] a30K = new String[30000];     
+        
+         
+         String[] a30K = new String[30000];   
+          
         a30K = cm.displayRegNo(A30K);
+         long startTime3 = System.currentTimeMillis();
         int validCount3 = cm.getValidRegistrationsCount(a30K);
+        long endTime3 = System.currentTimeMillis();
+        long timeTaken13 = endTime3 - startTime3;
+             System.out.println(timeTaken1);
         System.out.println(validCount3);
+        
+        System.out.println("StringSize ->|\tA10K \t|A20K \t|A30K"); 
+        System.out.println("Approach     |");  
+        System.out.println("---------------------------------------|"); 
+        System.out.println("Apr1         |\t"+timeTaken11+"\t|"+timeTaken12+"\t|"+timeTaken13+"\t");
+        System.out.println("Apr2         |\t"+timeTaken1+"\t|"+timeTaken2+"\t|"+timeTaken3+"\t");      
     }
 
     public int getValidRegistrationsCount(String[] registrations) {
@@ -86,11 +110,11 @@ class SY2022bit041 {
 
         for (int i = 0; i < A10K.length; i++) {
              A10K[i] = generateRandomRegistrationNo();
-             System.out.println(A10K[i]);
+          //   System.out.println(A10K[i]);
               countReg++;
          }
 
-         System.out.println("Generated " + countReg + " registration numbers.");
+       //  System.out.println("Generated " + countReg + " registration numbers.");
          return A10K;
     }
     
@@ -140,7 +164,70 @@ class SY2022bit041 {
           //Generate Random sequence
           for( i=0; i<3; i++){
           
-             randomSequence[i] = (int)(System.nanoTime() % 10);
+             randomSequence[i] = (int)(System.currentTimeMillis() % 10);
+            
+                                
+          }
+          for (i = 0; i < randomSequence.length; i++) {
+                randomSequenceChar[i] = Character.forDigit(randomSequence[i], 10);
+             }
+      
+          String randomSequenceString = String.valueOf(randomSequenceChar);
+    
+     
+        String dummyRandomRegistration = randomYearString + randomBranchString + randomSequenceString;
+        randomRegistration = dummyRandomRegistration;
+     
+          return randomRegistration;
+    }
+    
+        public String generateRandomRegistrationNoApr2(){
+          int[] randomYear = new int[4];
+          
+          int[] randomBranchInt = new int[3];
+          char[] randomBranchChar = new char[3];
+          int[] randomSequence = new int[3];
+          char[] randomSequenceChar = new char[4];
+          String randomRegistration = "";
+          int i = 0;
+        for (i = 0; i < 4; i++) {
+    // Generate Random year
+    randomYear[i] = (int) (System.currentTimeMillis() % 10);
+    }
+
+      // Ensure the generated year is 4 digits
+              for (i = 0; i < 4; i++) {
+                  randomYear[i] = randomYear[i] % 10;  // Ensure each digit is between 0 and 9
+              }
+        
+
+             char[] randomYearChar = new char[randomYear.length];
+
+                  for (i = 0; i < 4; i++) {
+                          randomYearChar[i] = Character.forDigit(randomYear[i], 10);
+                     }
+          
+         String randomYearString = String.valueOf(randomYearChar);
+       
+         // Create branch code 
+         i=0;
+          while(i <3){
+              
+             randomBranchInt[i] = (int)(System.currentTimeMillis() % 25) + 97;
+           
+             if(randomBranchInt[i]>= 97 && randomBranchInt[i] <= 122){
+                  randomBranchChar[i] = (char)randomBranchInt[i];
+             
+                  i++;
+             }
+          }
+     
+          String randomBranchString = String.valueOf(randomBranchChar);
+    
+          //Generate Random sequence
+          for( i=0; i<3; i++){
+          
+             randomSequence[i] = (int)(System.currentTimeMillis() % 10);
             
                                 
           }
